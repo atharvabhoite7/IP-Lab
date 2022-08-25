@@ -87,7 +87,8 @@ li::marker {
 }
 
 .icons {
-  display: inline;
+  display: flex;
+  flex-direction: column-reverse;
   justify-content: center; 
 }
 
