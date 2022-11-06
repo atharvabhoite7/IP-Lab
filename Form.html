@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <style>
+      body {
+        padding: 10px 50px;
+      }
+
+      .formdesign {
+        font-size: 20px;
+      }
+
+      .formdesign input {
+        width: 50%;
+        padding: 12px 20px;
+        border: 1px solid blue;
+        margin: 14px;
+        border-radius: 4px;
+        font-size: 15px;
+      }
+
+      .formerror {
+        color: red;
+      }
+
+      .but {
+        border-radius: 9px;
+        width: 100px;
+        height: 50px;
+        font-size: 25px;
+        margin: 22px 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Validate Form</h1>
+    <form
+    name="myForm"
+    onsubmit="return validateForm()"
+    >
+
+      <div class="formdesign" id="name">
+        Name: <input type="text" name="fname" required /><b
+          ><span class="formerror"></span
+        ></b>
+      </div>
+
+      <div class="formdesign" id="email">
+        Email: <input type="email" name="femail" required /><b
+          ><span class="formerror"></span
+        ></b>
+      </div>
+
+      <div class="formdesign" id="phone">
+        Contact: <input type="phone" name="fphone" required /><b
+          ><span class="formerror"></span
+        ></b>
+      </div>
+
+      <div class="formdesign" id="pass">
+        Password: <input type="password" name="fpass" required/><b
+          ><span class="formerror"></span
+        ></b>
+      </div>
+
+      <div class="formdesign" id="cpass">
+        Confirm Password: <input type="password" name="fcpass" required/><b
+          ><span class="formerror"></span
+        ></b>
+      </div>
+
+      <input class="but" type="submit" value="submit" onclick="validateForm()"/>
+    
+    </form>
+  </body>
+
+  <script>
+function clearErrors(){
+
+errors = document.getElementsByClassName('formerror');
+for(let item of errors)
+{
+    item.innerHTML = "";
+}
+}
+
+    function seterror(id, error) {
+      element = document.getElementById(id);
+      element.getElementsByClassName("formerror")[0].innerHTML = error;
+    }
+
+    function validateForm() {
+      var returnval = true;
+      clearErrors();
+
+      var name = document.forms["myForm"]["fname"].value;
+      if (name.length < 3) {
+        seterror("name", "*Name cannot be less than 3 characters");
+        returnval = false;
+      }
+
+      var phone = document.forms["myForm"]["fphone"].value;
+      if (phone.length != 10) {
+        seterror("phone", "*Phone number should be equal to 10 digits");
+        returnval = false;
+      }
+
+      var password = document.forms["myForm"]["fpass"].value;
+      if (password.length < 5) {
+        seterror("pass", "*Password should be greater than 5 characters");
+        returnval = false;
+      }
+
+      var cpassword = document.forms["myForm"]["fcpass"].value;
+      if (cpassword != password) {
+        seterror("cpass", "*Password and Confirm password do not match");
+        returnval = false;
+      } 
+
+      return returnval;
+
+      
+    }
+
+
+  </script>
+</html>
